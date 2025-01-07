@@ -66,7 +66,7 @@ val injectedPackageUid by extra(2000)
 
 val defaultManagerPackageName by extra("org.lsposed.manager")
 val verCode by extra("7290")
-val verName by extra("v1.9.2")
+val verName by extra("v1.9.2-it")
 val androidTargetSdkVersion by extra(35)
 val androidMinSdkVersion by extra(27)
 val androidBuildToolsVersion by extra("35.0.0")
