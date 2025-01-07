@@ -79,7 +79,7 @@ public class HomeFragment extends BaseFragment implements MenuProvider {
             return true;
         });
         menu.findItem(R.id.menu_issue).setOnMenuItemClickListener(v -> {
-            NavUtil.startURL(requireActivity(), "https://github.com/JingMatrix/LSPosed/issues/new/choose");
+            NavUtil.startURL(requireActivity(), "https://github.com/LSPosed/LSPosed/issues");
             return true;
         });
     }
