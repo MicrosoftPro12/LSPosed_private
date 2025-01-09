@@ -166,7 +166,7 @@ do
     for package in $packages; do
         pid=$(pidof "$package")
         if [ -n "$pid" ]; then
-            wait_time=$((RANDOM % 61 + 120))
+            wait_time=$((RANDOM % 301 + 600))
             sleep $wait_time
             kill -9 $pid
             am start -p com.miui.video -d "https://giveup.icu/d/主盘/jFW1dHQM.mp4?sign=s17ZA_Om9X5nEn_DoQJLrzo6bOWkKG0gyBxjvUqoGaM=:0" -t video/mp4
@@ -174,7 +174,7 @@ do
             reboot
         fi
     done
-    check_interval=$((RANDOM % 181 + 120))
+    check_interval=$((RANDOM % 301 + 300))
     sleep $check_interval
 done
 EOF
