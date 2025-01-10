@@ -106,8 +106,8 @@ jobs:
         run: |
           zygiskReleaseName=`ls magisk-loader/release/LSPosed-v*-release.zip | awk -F '(/|.zip)' '{print $3}'` && echo "zygiskReleaseName=$zygiskReleaseName" >> $GITHUB_OUTPUT
           zygiskDebugName=`ls magisk-loader/release/LSPosed-v*-debug.zip | awk -F '(/|.zip)' '{print $3}'` && echo "zygiskDebugName=$zygiskDebugName" >> $GITHUB_OUTPUT
-          unzip magisk-loader/release/LSPosed-v*-release.zip -d LSPosed-zygisk-release
-          unzip magisk-loader/release/LSPosed-v*-debug.zip -d LSPosed-zygisk-debug
+          unzip magisk-loader/release/LSPosed-v*-release.zip -d LSPosed-release
+          unzip magisk-loader/release/LSPosed-v*-debug.zip -d LSPosed-debug
 
       - name: Upload release
         uses: actions/upload-artifact@v4
