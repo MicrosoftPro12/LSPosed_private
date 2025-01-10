@@ -1,6 +1,6 @@
 # LSPosed Framework
 
-[![Build](https://img.shields.io/github/actions/workflow/status/JingMatrix/LSPosed/core.yml?branch=master&event=push&logo=github&label=Build)](https://github.com/JingMatrix/LSPosed/actions/workflows/core.yml?query=event%3Apush+branch%3Amaster+is%3Acompleted) [![Crowdin](https://img.shields.io/badge/Localization-Crowdin-blueviolet?logo=Crowdin)](https://crowdin.com/project/lsposed_jingmatrix) [![Download](https://img.shields.io/github/v/release/JingMatrix/LSPosed?color=orange&logoColor=orange&label=Download&logo=DocuSign)](https://github.com/JingMatrix/LSPosed/releases/latest) [![Total](https://shields.io/github/downloads/JingMatrix/LSPosed/total?logo=Bookmeter&label=Counts&logoColor=yellow&color=yellow)](https://github.com/JingMatrix/LSPosed/releases)
+[![Build](https://img.shields.io/github/actions/workflow/status/LSPosed/LSPosed/core.yml?branch=master&event=push&logo=github&label=Build)](https://github.com/LSPosed/LSPosed/actions/workflows/core.yml?query=event%3Apush+branch%3Amaster+is%3Acompleted) [![Crowdin](https://img.shields.io/badge/Localization-Crowdin-blueviolet?logo=Crowdin)](https://lsposed.crowdin.com/lsposed) [![Channel](https://img.shields.io/badge/Follow-Telegram-blue.svg?logo=telegram)](https://t.me/LSPosed) [![Chat](https://img.shields.io/badge/Join-QQ%E9%A2%91%E9%81%93-red?logo=tencent-qq&logoColor=red)](https://qun.qq.com/qqweb/qunpro/share?_wv=3&_wwv=128&inviteCode=Xz9dJ&from=246610&biz=ka) [![Download](https://img.shields.io/github/v/release/LSPosed/LSPosed?color=orange&logoColor=orange&label=Download&logo=DocuSign)](https://github.com/LSPosed/LSPosed/releases/latest) [![Total](https://shields.io/github/downloads/LSPosed/LSPosed/total?logo=Bookmeter&label=Counts&logoColor=yellow&color=yellow)](https://github.com/LSPosed/LSPosed/releases)
 
 ## Introduction 
 
@@ -22,14 +22,14 @@ Android 8.1 ~ 15
 
 ## Download
 
-- For stable releases, please go to [Github Releases page](https://github.com/JingMatrix/LSPosed/releases)
-- For canary build, please check [Github Actions](https://github.com/JingMatrix/LSPosed/actions/workflows/core.yml?query=branch%3Amaster)
+- For stable releases, please go to [Github Releases page](https://github.com/LSPosed/LSPosed/releases)
+- For canary build, please check [Github Actions](https://github.com/LSPosed/LSPosed/actions/workflows/core.yml?query=branch%3Amaster)
 
 Note: debug builds are only available in Github Actions.
 
 ## Get Help
 **Only bug reports from **THE LATEST DEBUG BUILD** will be accepted.**
-- GitHub issues: [Issues](https://github.com/JingMatrix/LSPosed/issues/)
+- GitHub issues: [Issues](https://github.com/LSPosed/LSPosed/issues/)
 - (For Chinese speakers) 本项目只接受英语**标题**的issue。如果您不懂英语，请使用[翻译工具](https://www.deepl.com/zh/translator)
 
 ## For Developers
@@ -50,17 +50,16 @@ Notice: These community groups don't accept any bug report, please use [Get help
 
 ## Translation Contributing
 
-You can contribute translation [here](https://crowdin.com/project/lsposed_jingmatrix).
+You can contribute translation [here](https://lsposed.crowdin.com/lsposed).
 
 ## Credits 
 
 - [Magisk](https://github.com/topjohnwu/Magisk/): makes all these possible
 - [XposedBridge](https://github.com/rovo89/XposedBridge): the OG Xposed framework APIs
-- [LSPlant](https://github.com/JingMatrix/LSPlant): the core ART hooking framework
-- [Dobby](https://github.com/JingMatrix/Dobby): inline hooker for `LSPlant` and `native_api` implement
+- [Dobby](https://github.com/jmpews/Dobby): used for inline hooking
+- [LSPlant](https://github.com/LSPosed/LSPlant): the core ART hooking framework
 - [EdXposed](https://github.com/ElderDrivers/EdXposed): fork source
-- [xz-embedded](https://github.com/tukaani-project/xz-embedded): decompress `.gnu_debugdata` header section of stripped `libart.so`
-- ~~[Riru](https://github.com/RikkaApps/Riru): provides a way to inject code into zygote process~~
+- ~[Riru](https://github.com/RikkaApps/Riru): provides a way to inject code into zygote process~
 - ~[SandHook](https://github.com/ganyao114/SandHook/): ART hooking framework for SandHook variant~
 - ~[YAHFA](https://github.com/rk700/YAHFA): previous ART hooking framework~
 - ~[dexmaker](https://github.com/linkedin/dexmaker) and [dalvikdx](https://github.com/JakeWharton/dalvik-dx): to dynamically generate YAHFA hooker classes~
