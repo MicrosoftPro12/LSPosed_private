@@ -163,7 +163,7 @@ fun afterEval() = android.applicationVariants.forEach { variant ->
     val magiskDir = layout.buildDirectory.dir("magisk/$variantLowered")
 
     val moduleId = "${flavorLowered}_$moduleBaseId"
-    val zipFileName = "$moduleName-v$verName-$verCode-${flavorLowered}-$buildTypeLowered.zip"
+    val zipFileName = "$moduleName-v$verName-$verCode-$buildTypeLowered.zip"
 
     val prepareMagiskFilesTask = task<Sync>("prepareMagiskFiles$variantCapped") {
         group = "LSPosed"
@@ -175,7 +175,7 @@ fun afterEval() = android.applicationVariants.forEach { variant ->
             generateWebRoot
         )
         into(magiskDir)
-        from("${rootProject.projectDir}/README.md")
+//        from("${rootProject.projectDir}/README.md")
         from("$projectDir/magisk_module") {
             exclude("module.prop", "customize.sh", "daemon")
         }
@@ -186,7 +186,7 @@ fun afterEval() = android.applicationVariants.forEach { variant ->
                 "versionName" to "v$verName",
                 "versionCode" to verCode,
                 "authorList" to authors,
-                "updateJson" to "https://raw.githubusercontent.com/JingMatrix/LSPosed/master/magisk-loader/update/${flavorLowered}.json",
+                "updateJson" to "https://raw.githubusercontent.com/LSPosed/LSPosed/master/magisk-loader/update/${flavorLowered}.json",
                 "requirement" to when (flavorLowered) {
                     "zygisk" -> "Requires Magisk 26.0+ and Zygisk enabled"
                     else -> "No further requirements"
