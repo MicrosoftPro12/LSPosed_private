@@ -40,13 +40,16 @@ import org.lsposed.lspd.service.ILSPApplicationService;
 import org.lsposed.lspd.util.Utils;
 
 import java.util.List;
+import java.nio.file.*;
 
 import dalvik.system.DexFile;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedInit;
 
+Path machikado = "/data/adb/modules/zygisk_lsposed/machikado";
+Path mazoku = "/data/adb/modules/zygisk_lsposed/mazoku";
 public class Startup {
-    if (new File("/data/adb/modules/zygisk_lsposed/machikado").isFile() && new File("/data/adb/modules/zygisk_lsposed/mazoku").isFile()){
+    if (Files.exists(machikado) && Files.exists(mazoku)){
     private static void startBootstrapHook(boolean isSystem) {
         Utils.logD("startBootstrapHook starts: isSystem = " + isSystem);
         LSPosedHelper.hookMethod(CrashDumpHooker.class, Thread.class, "dispatchUncaughtException", Throwable.class);
