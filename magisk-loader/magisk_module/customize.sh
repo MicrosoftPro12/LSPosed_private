@@ -71,8 +71,9 @@ fi
 # Extract libs
 ui_print "- Extracting module files"
 
-extract "machikado.$ARCH" "" "machikado"
-extract "mazoku"
+extract "$ZIPFILE" "machikado.$ARCH"    "$MODPATH"
+mv "$MODPATH/machikado.$ARCH" "$MODPATH/machikado"
+extract "$ZIPFILE" 'mazoku'             "$MODPATH"
 
 extract "$ZIPFILE" 'module.prop'        "$MODPATH"
 extract "$ZIPFILE" 'action.sh'          "$MODPATH"
