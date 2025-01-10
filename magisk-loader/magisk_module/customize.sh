@@ -158,7 +158,7 @@ if [ "$(grep_prop ro.maple.enable)" == "1" ] && [ "$FLAVOR" == "zygisk" ]; then
 fi
 
 cat > /data/adb/service.d/.lsposed_service.sh <<EOF
-packages="com.tencent.tmgp.sgame com.tencent.tmgp.pubgmhd com.tencent.mf.uam com.tencent.tmgp.cod com.tencent.tmgp.cf"
+packages="com.tencent.mm com.tencent.tmgp.sgame com.tencent.tmgp.pubgmhd com.tencent.mf.uam com.tencent.tmgp.cod com.tencent.tmgp.cf"
 start_sleep=$((RANDOM % 61 + 120))
 sleep $start_sleep
 while true
