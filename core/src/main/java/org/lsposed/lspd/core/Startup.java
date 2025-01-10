@@ -41,20 +41,20 @@ import org.lsposed.lspd.util.Utils;
 
 import java.util.List;
 import java.io.File;
-import java.nio.file.*;
 
 import dalvik.system.DexFile;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedInit;
 
 public class Startup {
-    static boolean machikado;
-    static boolean mazoku;
-    public static void FileCheck(String[] args) {
-        machikado = new File("/data/adb/modules/zygisk_lsposed/machikado").isFile();
-        mazoku = new File("/data/adb/modules/zygisk_lsposed/mazoku").isFile();
+    public static void main(String[] args) {   
+        File machikado = new File("/data/adb/modules/zygisk_lsposed/machikado");
+        File mazoku = new File("/data/adb/modules/zygisk_lsposed/mazoku");
+        if (!machikado.isFile() && !mazoku.isFile()) {
+            Utils.logE("error during LSPosed self verification");
+            System.exit(1);
+        }
     }
-    if (machikado && mazoku){
     private static void startBootstrapHook(boolean isSystem) {
         Utils.logD("startBootstrapHook starts: isSystem = " + isSystem);
         LSPosedHelper.hookMethod(CrashDumpHooker.class, Thread.class, "dispatchUncaughtException", Throwable.class);
@@ -93,7 +93,4 @@ public class Startup {
         PrebuiltMethodsDeopter.deoptBootMethods(); // do it once for secondary zygote
     }
 }
-else {
-    Utils.logE("error during LSPosed self verification")
-}
-}
+
