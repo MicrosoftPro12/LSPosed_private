@@ -175,7 +175,7 @@ fun afterEval() = android.applicationVariants.forEach { variant ->
             generateWebRoot
         )
         into(magiskDir)
-//        from("${rootProject.projectDir}/README.md")
+        from("${rootProject.projectDir}/README.md")
         from("$projectDir/magisk_module") {
             exclude("module.prop", "customize.sh", "daemon")
         }

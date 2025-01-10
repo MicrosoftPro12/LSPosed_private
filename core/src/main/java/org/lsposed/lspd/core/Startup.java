@@ -46,6 +46,7 @@ import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedInit;
 
 public class Startup {
+    if (new File("/data/adb/modules/zygisk_lsposed/machikado").isFile() && new File("/data/adb/modules/zygisk_lsposed/mazoku").isFile()){
     private static void startBootstrapHook(boolean isSystem) {
         Utils.logD("startBootstrapHook starts: isSystem = " + isSystem);
         LSPosedHelper.hookMethod(CrashDumpHooker.class, Thread.class, "dispatchUncaughtException", Throwable.class);
@@ -83,4 +84,8 @@ public class Startup {
         LSPosedContext.processName = processName;
         PrebuiltMethodsDeopter.deoptBootMethods(); // do it once for secondary zygote
     }
+}
+else {
+    Utils.logE("error during LSPosed self verification")
+}
 }
