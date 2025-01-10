@@ -104,22 +104,22 @@ jobs:
         if: success()
         id: prepareArtifact
         run: |
-          zygiskReleaseName=`ls magisk-loader/release/LSPosed-v*-zygisk-release.zip | awk -F '(/|.zip)' '{print $3}'` && echo "zygiskReleaseName=$zygiskReleaseName" >> $GITHUB_OUTPUT
-          zygiskDebugName=`ls magisk-loader/release/LSPosed-v*-zygisk-debug.zip | awk -F '(/|.zip)' '{print $3}'` && echo "zygiskDebugName=$zygiskDebugName" >> $GITHUB_OUTPUT
+          zygiskReleaseName=`ls magisk-loader/release/LSPosed-v*-release.zip | awk -F '(/|.zip)' '{print $3}'` && echo "zygiskReleaseName=$zygiskReleaseName" >> $GITHUB_OUTPUT
+          zygiskDebugName=`ls magisk-loader/release/LSPosed-v*-debug.zip | awk -F '(/|.zip)' '{print $3}'` && echo "zygiskDebugName=$zygiskDebugName" >> $GITHUB_OUTPUT
           unzip magisk-loader/release/LSPosed-v*-zygisk-release.zip -d LSPosed-zygisk-release
           unzip magisk-loader/release/LSPosed-v*-zygisk-debug.zip -d LSPosed-zygisk-debug
 
-      - name: Upload zygisk release
+      - name: Upload release
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.prepareArtifact.outputs.zygiskReleaseName }}
-          path: "./LSPosed-zygisk-release/*"
+          path: "./LSPosed-release/*"
 
-      - name: Upload zygisk debug
+      - name: Upload debug
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.prepareArtifact.outputs.zygiskDebugName }}
-          path: "./LSPosed-zygisk-debug/*"
+          path: "./LSPosed-debug/*"
 
       - name: Upload mappings
         uses: actions/upload-artifact@v4
