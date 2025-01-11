@@ -57,7 +57,7 @@ public class WelcomeDialog extends DialogFragment {
                             home.showHint(R.string.settings_unsupported_pin_shortcut_summary, false);
                         }
                     }
-                });*/
+                })*/;
         return builder.create();
     }
 
