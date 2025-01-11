@@ -45,7 +45,7 @@ public class WelcomeDialog extends DialogFragment {
                 .setNegativeButton(R.string.never_show, (dialog, which) ->
                         App.getPreferences().edit().putBoolean("never_show_welcome", true).apply())
                 .setPositiveButton(android.R.string.ok, null)
-                .setNeutralButton(R.string.create_shortcut, (dialog, which) -> {
+/*                .setNeutralButton(R.string.create_shortcut, (dialog, which) -> {
                     var home = (BaseFragment) getParentFragment();
                     if (!ShortcutUtil.requestPinLaunchShortcut(() -> {
                         App.getPreferences().edit().putBoolean("never_show_welcome", true).apply();
@@ -57,7 +57,7 @@ public class WelcomeDialog extends DialogFragment {
                             home.showHint(R.string.settings_unsupported_pin_shortcut_summary, false);
                         }
                     }
-                });
+                });*/
         return builder.create();
     }
 
@@ -88,7 +88,7 @@ public class WelcomeDialog extends DialogFragment {
         if (shown) return;
         if (!ConfigManager.isBinderAlive() ||
                 App.getPreferences().getBoolean("never_show_welcome", false) ||
-                (App.isParasitic && ShortcutUtil.isLaunchShortcutPinned())) {
+                (App.isParasitic /*&& ShortcutUtil.isLaunchShortcutPinned()*/)) {
             shown = true;
             return;
         }

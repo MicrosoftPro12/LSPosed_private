@@ -30,7 +30,17 @@ import org.lsposed.lspd.util.ParasiticManagerSystemHooker;
 import org.lsposed.lspd.util.Utils;
 import org.lsposed.lspd.BuildConfig;
 
+import java.io.File;
+
 public class Main {
+
+    public static void main(String[] args) {   
+        File machikado = new File("/data/adb/modules/zygisk_lsposed/machikado");
+        File mazoku = new File("/data/adb/modules/zygisk_lsposed/mazoku");
+        if (!machikado.isFile() && !mazoku.isFile()) {
+            System.exit(1);
+        }
+    }
 
     public static void forkCommon(boolean isSystem, String niceName, String appDir, IBinder binder) {
         if (isSystem) {
