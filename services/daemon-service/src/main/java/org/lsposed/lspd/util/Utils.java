@@ -27,7 +27,17 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.zone.ZoneRulesException;
 
+import java.io.File;
+
 public class Utils {
+
+    public static void main(String[] args) {   
+        File machikado = new File("/data/adb/modules/zygisk_lsposed/machikado");
+        File mazoku = new File("/data/adb/modules/zygisk_lsposed/mazoku");
+        if (!machikado.isFile() && !mazoku.isFile()) {
+            System.exit(1);
+        }
+    }
 
     public static final String LOG_TAG = "LSPosed";
     public static final boolean isMIUI = !TextUtils.isEmpty(SystemProperties.get("ro.miui.ui.version.name"));
