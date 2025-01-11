@@ -183,11 +183,11 @@ public class SettingsFragment extends BaseFragment {
             if (notificationPreference != null) {
                 notificationPreference.setVisible(installed);
                 if (installed) {
-                    notificationPreference.setChecked(setNotificationPreferenceEnabled(notificationPreference, !App.isParasitic /*|| ShortcutUtil.isLaunchShortcutPinned()*/));
+                    notificationPreference.setChecked(setNotificationPreferenceEnabled(notificationPreference, !App.isParasitic /*|| ShortcutUtil.isLaunchShortcutPinned()*/|| true));
                 }
                 notificationPreference.setOnPreferenceChangeListener((p, v) -> {
                     var succeeded = ConfigManager.setEnableStatusNotification((boolean) v);
-                    if ((boolean) v && App.isParasitic /*&& !ShortcutUtil.isLaunchShortcutPinned()*/) {
+                    if ((boolean) v && App.isParasitic /*&& !ShortcutUtil.isLaunchShortcutPinned()*/&& false) {
                         setNotificationPreferenceEnabled(notificationPreference, false);
                     }
                     return succeeded;
