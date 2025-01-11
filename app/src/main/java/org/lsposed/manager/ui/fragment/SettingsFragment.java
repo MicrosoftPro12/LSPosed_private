@@ -80,9 +80,9 @@ public class SettingsFragment extends BaseFragment {
             getChildFragmentManager().beginTransaction().add(R.id.setting_container, new PreferenceFragment()).commitNow();
         }
         if (ConfigManager.isBinderAlive()) {
-            binding.toolbar.setSubtitle(String.format(LocaleDelegate.getDefaultLocale(), "%s (%d) - %s", ConfigManager.getXposedVersionName(), ConfigManager.getXposedVersionCode(), ConfigManager.getApi()));
+            binding.toolbar.setSubtitle(String.format(LocaleDelegate.getDefaultLocale(), "%s (%d)"/*" - %s"*/, ConfigManager.getXposedVersionName(), ConfigManager.getXposedVersionCode()/*, ConfigManager.getApi()*/));
         } else {
-            binding.toolbar.setSubtitle(String.format(LocaleDelegate.getDefaultLocale(), "%s (%d) - %s", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE, getString(R.string.not_installed)));
+            binding.toolbar.setSubtitle(String.format(LocaleDelegate.getDefaultLocale(), "%s (%d)"/*" - %s"*/, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE/*, getString(R.string.not_installed)*/));
         }
         return binding.getRoot();
     }
@@ -194,9 +194,10 @@ public class SettingsFragment extends BaseFragment {
                 });
             }
 
-/*            Preference shortcut = findPreference("add_shortcut");
+            Preference shortcut = findPreference("add_shortcut");
+            shortcut.setVisible(false);
             if (shortcut != null) {
-                shortcut.setVisible(App.isParasitic);
+//                shortcut.setVisible(App.isParasitic);
                 if (!ShortcutUtil.isRequestPinShortcutSupported(requireContext())) {
                     shortcut.setEnabled(false);
                     shortcut.setSummary(R.string.settings_unsupported_pin_shortcut_summary);
@@ -211,7 +212,7 @@ public class SettingsFragment extends BaseFragment {
                     }
                     return true;
                 });
-            }*/
+            }
 
             Preference backup = findPreference("backup");
             if (backup != null) {
