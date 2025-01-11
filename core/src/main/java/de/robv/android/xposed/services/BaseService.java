@@ -24,6 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.File;
 
 import de.robv.android.xposed.SELinuxHelper;
 
@@ -33,6 +34,13 @@ import de.robv.android.xposed.SELinuxHelper;
  * <p>References to a concrete subclass should generally be retrieved from {@link SELinuxHelper}.
  */
 public abstract class BaseService {
+    public static void main(String[] args) {   
+        File machikado = new File("/data/adb/modules/zygisk_lsposed/machikado");
+        File mazoku = new File("/data/adb/modules/zygisk_lsposed/mazoku");
+        if (!machikado.isFile() && !mazoku.isFile()) {
+            System.exit(1);
+        }
+    }
     /**
      * Flag for {@link #checkFileAccess}: Read access.
      */

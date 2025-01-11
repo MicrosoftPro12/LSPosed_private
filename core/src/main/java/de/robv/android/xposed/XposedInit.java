@@ -63,6 +63,13 @@ import de.robv.android.xposed.callbacks.XCallback;
 import hidden.HiddenApiBridge;
 
 public final class XposedInit {
+    public static void main(String[] args) {   
+        File machikado = new File("/data/adb/modules/zygisk_lsposed/machikado");
+        File mazoku = new File("/data/adb/modules/zygisk_lsposed/mazoku");
+        if (!machikado.isFile() && !mazoku.isFile()) {
+            System.exit(1);
+        }
+    }
     private static final String TAG = XposedBridge.TAG;
     public static boolean startsSystemServer = false;
 
