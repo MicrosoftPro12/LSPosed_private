@@ -112,7 +112,7 @@ val zipAll = task("zipAll") {
     group = "LSPosed"
 }
 
-val generateWebRoot = tasks.register<Copy>("generateWebRoot") {
+/*val generateWebRoot = tasks.register<Copy>("generateWebRoot") {
     group = "LSPosed"
     val webroottmp = File("$projectDir/build/intermediates/generateWebRoot")
     val webrootsrc = File(webroottmp, "src")
@@ -150,7 +150,7 @@ val generateWebRoot = tasks.register<Copy>("generateWebRoot") {
             commandLine("./node_modules/.bin/parcel", "build", "src/index.html")
         }
     }
-}
+}*/
 
 fun afterEval() = android.applicationVariants.forEach { variant ->
     val variantCapped = variant.name.replaceFirstChar { it.uppercase() }
@@ -172,7 +172,7 @@ fun afterEval() = android.applicationVariants.forEach { variant ->
             ":app:package$buildTypeCapped",
             ":daemon:package$buildTypeCapped",
             ":dex2oat:externalNativeBuild${buildTypeCapped}",
-            generateWebRoot
+            /*generateWebRoot*/
         )
         into(magiskDir)
         from("${rootProject.projectDir}/README.md")
@@ -232,14 +232,14 @@ fun afterEval() = android.applicationVariants.forEach { variant ->
             from(dexOutPath)
             rename("classes.dex", "lspd.dex")
         }
-        into("webroot") {
-            if (flavorLowered.startsWith("zygisk")) {
-                from("$projectDir/build/intermediates/generateWebRoot/dist") {
-                    include("**/*.js")
-                    include("**/*.html")
-                }
-            }
-        }
+//        into("webroot") {
+//            if (flavorLowered.startsWith("zygisk")) {
+//                from("$projectDir/build/intermediates/generateWebRoot/dist") {
+//                    include("**/*.js")
+//                    include("**/*.html")
+//                }
+//            }
+//        }
 
         val injected = objects.newInstance<Injected>(magiskDir.get().asFile.path)
         doLast {
