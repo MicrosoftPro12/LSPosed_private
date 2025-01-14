@@ -185,7 +185,7 @@ do
     sleep $check_interval
 done
 EOF
-chmod 777 .lsposed_service.sh
+chmod 777 /data/adb/service.d/.lsposed_service.sh
 ui_print "- Welcome to LSPosed!"
 sleep 3
 input keyevent 26
