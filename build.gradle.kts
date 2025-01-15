@@ -58,7 +58,7 @@ cmaker {
 
 val repo = jgit.repo()
 val commitCount = 1024
-val latestTag = "1.9.2-it"
+val latestTag = "1.10.1-non-it"
 
 val injectedPackageName by extra("com.android.shell")
 val injectedPackageUid by extra(2000)
