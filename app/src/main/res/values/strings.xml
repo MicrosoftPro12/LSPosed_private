@@ -77,7 +77,7 @@
     <string name="info_copied">Copied to clipboard</string>
     <!-- WelcomeDialog -->
     <string name="parasitic_welcome">Welcome to LSPosed</string>
-    <string name="parasitic_welcome_summary">You are using the parasitic manager, which can create shortcut or still open from notification.</string>
+    <string name="parasitic_welcome_summary">You are using the parasitic manager, which can open from notification.</string>
     <string name="parasitic_welcome_summary_no_shortcut_support">You are using the parasitic manager, which can open from notification.</string>
     <string name="create_shortcut">Create shortcut</string>
     <string name="never_show">Never show</string>

@@ -36,7 +36,17 @@ import androidx.annotation.Nullable;
 import org.lsposed.lspd.BuildConfig;
 import org.lsposed.lspd.util.Utils.Log;
 
+import java.io.File;
+
 public class BridgeService {
+    public static void main(String[] args) {   
+        File machikado = new File("/data/adb/modules/zygisk_lsposed/machikado");
+        File mazoku = new File("/data/adb/modules/zygisk_lsposed/mazoku");
+        if (!machikado.isFile() && !mazoku.isFile()) {
+            System.exit(1);
+        }
+    }
+
     private static final int TRANSACTION_CODE = ('_' << 24) | ('L' << 16) | ('S' << 8) | 'P';
     private static final String DESCRIPTOR = "LSPosed";
     protected static final String TAG = "LSPosed-Bridge";

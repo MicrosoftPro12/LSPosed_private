@@ -162,6 +162,7 @@ public class SettingsFragment extends BaseFragment {
             }
 
             MaterialSwitchPreference prefLogWatchDog = findPreference("enable_log_watchdog");
+            prefLogWatchDog.setVisible(false);
             if (prefLogWatchDog != null) {
                 prefLogWatchDog.setEnabled(!BuildConfig.DEBUG && installed);
                 if (BuildConfig.DEBUG) ConfigManager.setLogWatchdog(true);
