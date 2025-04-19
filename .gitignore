@@ -11,3 +11,4 @@ apache/local/generated
 /captures
 fix-email.sh
 .vscode/
+external/cxx/
