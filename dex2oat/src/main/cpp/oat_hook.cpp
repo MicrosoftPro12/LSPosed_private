@@ -106,6 +106,7 @@ __attribute__((constructor)) static void initialize() {
             break;
         }
     }
+    LOGD("dex2oat binary %lu:%lu", dev, inode);
 
     PLT_HOOK_REGISTER(dev, inode, _ZNK3art9OatHeader20GetKeyValueStoreSizeEv);
     PLT_HOOK_REGISTER(dev, inode, _ZNK3art9OatHeader16GetKeyValueStoreEv);
