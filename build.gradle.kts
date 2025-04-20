@@ -35,6 +35,7 @@ cmaker {
             arrayOf(
                 "-DEXTERNAL_ROOT=${File(rootDir.absolutePath, "external")}",
                 "-DCORE_ROOT=${File(rootDir.absolutePath, "core/src/main/jni")}",
+                "-DANDROID_STL=none",
                 "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
             )
         )
