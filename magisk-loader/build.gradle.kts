@@ -221,7 +221,6 @@ fun afterEval() = android.applicationVariants.forEach { variant ->
         into("bin") {
             from(project(":dex2oat").layout.buildDirectory.dir("intermediates/cmake/$buildTypeLowered/obj")) {
                 include("**/dex2oat")
-                include("**/liboat_hook.so")
             }
         }
         val dexOutPath = if (buildTypeLowered == "release")

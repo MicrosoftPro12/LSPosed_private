@@ -1,6 +1,5 @@
 #pragma once
 
-#include <errno.h>
 #include <android/log.h>
 
 #ifndef LOG_TAG
