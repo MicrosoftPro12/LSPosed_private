@@ -12,3 +12,4 @@ apache/local/generated
 fix-email.sh
 .vscode/
 external/cxx/
+magisk-loader/magisk_module/service.sh

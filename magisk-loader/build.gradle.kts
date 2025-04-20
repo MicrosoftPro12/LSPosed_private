@@ -349,7 +349,7 @@ val reRunDaemon = task<Exec>("reRunDaemon") {
     // tricky to pass a minus number to avoid the injection warning
     commandLine(
         adb, "shell", "ASH_STANDALONE=1", "su", "-mm", "-pc",
-        "/data/adb/magisk/busybox sh /data/adb/modules/*_lsposed/service.sh --system-server-max-retry=-1&"
+        "/data/adb/magisk/busybox sh /data/adb/modules/*_lsposed/post-fs-data.sh --system-server-max-retry=-1&"
     )
     isIgnoreExitValue = true
 }
